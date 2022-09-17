@@ -1,47 +1,46 @@
-using sun.security.provider;
+using KCode.MD4;
 using System.Diagnostics;
 
 namespace Ed2kGui
 {
     public partial class Form1 : Form
     {
-        private const int BlockSize = 9728000;
-
         public Form1()
         {
             InitializeComponent();
 
-            var fpath = @"C:\temp\test.mkv";
-            Calc(fpath);
+            //var fpath = @"C:\temp\test.mkv";
+            //Calc(fpath);
         }
 
         public void Calc(string fpath)
         {
-            var buf = new byte[BlockSize];
-            var fs = File.OpenRead(fpath);
-            var r = new BufferedStream(fs);
-            var blockDigests = new List<byte[]>();
+            var fi = new FileInfo(fpath);
 
-            var m = sun.security.provider.MD4.getInstance();
-            m.update(buf);
-            //for (int i = 0; i < fs.Length; i += BlockSize)
-            //{
-            //    Debug.WriteLine($"Block {i}…");
-            //    r.Read(buf);
-            //    MD4 md4 = new(buf.AsSpan());
-            //    md4.DigestString;
-            //    var md4 = MD4.getInstance();
-            //    md4.i
-            //    var digest = MD4.getInstance().(buf);
-            //    blockDigests.Add(digest);
-            //}
+            var digest = new MD4(File.ReadAllBytes(fi.FullName)).DigestString;
+            var md4 = $"md4://{fi.Name}/{digest}/";
+            Debug.WriteLine($"md4 {md4}");
+            Results.Text += $"{md4}\r\n";
+        }
 
-            var full = new List<byte>();
-            foreach (var blockDigest in blockDigests) full.AddRange(blockDigest);
+        private void Form1_DragDrop(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
 
-            //var ed2kDigest = MD4.getInstance().digest(full.ToArray());
-            //var ed2k = string.Join("", ed2kDigest.Select(x => x.ToString("x")));
-            //Debug.WriteLine($"ed2k {ed2k}");
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            foreach (var file in files)
+            {
+                Calc(file);
+            }
+        }
+
+        private void Home_DragDrop(object sender, DragEventArgs e)
+        {
+        }
+
+        private void Form1_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = e.Data?.GetDataPresent(DataFormats.FileDrop) ?? false ? DragDropEffects.Copy : DragDropEffects.None;
         }
     }
 }

@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ed2kGui\Ed2kGui.csproj" />
+    <ProjectReference Include="..\MD4\MD4.csproj" />
   </ItemGroup>
 
 </Project>

@@ -28,12 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.Results = new System.Windows.Forms.TextBox();
+            this.SuspendLayout();
+            // 
+            // Results
+            // 
+            this.Results.Location = new System.Drawing.Point(42, 151);
+            this.Results.Multiline = true;
+            this.Results.Name = "Results";
+            this.Results.Size = new System.Drawing.Size(570, 268);
+            this.Results.TabIndex = 0;
+            this.Results.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
+            this.Results.DragOver += new System.Windows.Forms.DragEventHandler(this.Form1_DragOver);
+            // 
+            // Form1
+            // 
+            this.AllowDrop = true;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Results);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
+            this.DragOver += new System.Windows.Forms.DragEventHandler(this.Form1_DragOver);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private TextBox Results;
     }
 }

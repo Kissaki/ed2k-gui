@@ -1,4 +1,4 @@
-﻿namespace Ed2kGui;
+﻿namespace KCode.MD4;
 
 public static class MD4Internals
 {
@@ -11,7 +11,17 @@ public static class MD4Internals
 
     public static ReadOnlySpan<byte> InitialABCD => _initialABCD.AsSpan();
 
-    public static int InputBlockLength => 64;
+    public const int InputBlockLength = 64;
+
+    // high-order digit first
+    // This constant represents the square root of 2.
+    // Octal value 013240474631
+    public const uint r2const = 0x5A827999;
+
+    // high-order digit first
+    // This constant represents the square root of 3.
+    // Octal value 015666365641
+    public const uint r3const = 0x6ED9EBA1;
 
     /// <summary>
     /// Append to input the bit padding and the input length
@@ -79,7 +89,7 @@ public static class MD4Internals
     /// </remarks>
     public static uint g(uint x, uint y, uint z)
     {
-        return (x & y) | (x & z) | (y & z);
+        return x & y | x & z | y & z;
     }
 
     /// <remarks>
@@ -101,7 +111,7 @@ public static class MD4Internals
     public static uint rot(uint x, int s)
     {
         uint tmp = x;
-        return (tmp << s) | (tmp >> (32 - s));
+        return tmp << s | tmp >> 32 - s;
     }
 
     //public static uint ff(uint a, uint b, uint c, uint d, uint i, int s)

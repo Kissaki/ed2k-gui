@@ -5,12 +5,16 @@ namespace MD4Test;
 public class MD4Tests
 {
     [Fact]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Assertions", "xUnit2000:Constants and literals should be the expected argument", Justification = "<Pending>")]
     public void TestConstants()
     {
         // MD4 is bit based - but we implement byte based
         // 512 bit = 64 byte
         Assert.Equal(64, 512 / 8);
         Assert.Equal(64, MD4Internals.InputBlockLength);
+
+        Assert.Equal((uint)Math.Sqrt(2) * Math.Pow(2, 30), MD4Internals.r2const);
+        Assert.Equal((uint)Math.Sqrt(3) * Math.Pow(2, 30), MD4Internals.r3const);
     }
 
     /// <summary>
@@ -142,37 +146,25 @@ public class MD4Tests
         Assert.Equal<byte>(expected, actual.ToArray());
     }
 
-
-
-
     [Fact]
     public void TestEmptyData()
     {
-        var block = new byte[64];
-        block[0] = 0b1000_0000;
-        for (int i = 1; i < block.Length; ++i)
-        {
-            block[i] = 0x00;
-        }
-
-        var md4 = new MD4();
-        md4.UpdateWithFullBlock(block);
+        var md4 = new MD4(Array.Empty<byte>());
 
         Assert.Equal("31d6cfe0d16ae931b73c59d7e0c089c0", md4.DigestString);
     }
 
+    // Test cases from RFC 1186 page 16/17 - MDtestsuite() MDstring(s) MDprint(MDp)
     [Theory]
     [InlineData("31d6cfe0d16ae931b73c59d7e0c089c0", "")]
-    [InlineData("bde52cb31de33e46245e05fbdbd6fb24 ", "a")]
-    [InlineData("a448017aaf21d8525fc10ae87aa6729d ", "abc")]
-    [InlineData("d9130a8164549fe818874806e1c7014b ", "message digest")]
-    [InlineData("043f8582f241db351ce627e153e7f0e4 ", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")]
-    [InlineData("a448017aaf21d8525fc10ae87aa6729d  ", "abcfile")]
-    public void Test(string expectedDigest, string value)
+    [InlineData("bde52cb31de33e46245e05fbdbd6fb24", "a")]
+    [InlineData("a448017aaf21d8525fc10ae87aa6729d", "abc")]
+    [InlineData("d9130a8164549fe818874806e1c7014b", "message digest")]
+    [InlineData("043f8582f241db351ce627e153e7f0e4", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")]
+    [InlineData("a448017aaf21d8525fc10ae87aa6729d", "abcfile")]
+    public void Test(string expectedDigest, string text)
     {
-        var md4 = new MD4();
-        var data = Encoding.ASCII.GetBytes(value);
-        md4.Update(data);
+        var md4 = new MD4(Encoding.ASCII.GetBytes(text).AsSpan());
         Assert.Equal(expectedDigest, md4.DigestString);
     }
 }
