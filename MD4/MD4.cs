@@ -123,9 +123,12 @@ public class MD4
 
     /// <remarks>
     /// <para>Let [A B C D i s] denote A = (A + f(B, C, D) + X[i]) <<< s</para>
+    /// <para>[abcd k s]  =>  a = (a + f(b,c,d) + X[k]) <<< s</para>
     /// </remarks>
     private static void R1(Span<byte> block, ref uint a, uint b, uint c, uint d, int i, int s)
     {
+        // nr = word index => byte index
+        i *= 4;
         a = BitOperations.RotateLeft(a + f(b, c, d) + MemoryMarshal.Read<uint>(block[i..]), s);
     }
 
@@ -134,6 +137,8 @@ public class MD4
     /// </remarks>
     private static void R2(Span<byte> block, ref uint a, uint b, uint c, uint d, int i, int s)
     {
+        // nr = word index => byte index
+        i *= 4;
         a = BitOperations.RotateLeft(a + g(b, c, d) + MemoryMarshal.Read<uint>(block[i..]) + r2const, s);
     }
 
@@ -142,6 +147,8 @@ public class MD4
     /// </remarks>
     private static void R3(Span<byte> block, ref uint a, uint b, uint c, uint d, int i, int s)
     {
+        // nr = word index => byte index
+        i *= 4;
         a = BitOperations.RotateLeft(a + h(b, c, d) + MemoryMarshal.Read<uint>(block[i..]) + r3const, s);
     }
 }

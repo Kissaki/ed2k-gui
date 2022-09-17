@@ -161,7 +161,7 @@ public class MD4Tests
     [InlineData("a448017aaf21d8525fc10ae87aa6729d", "abc")]
     [InlineData("d9130a8164549fe818874806e1c7014b", "message digest")]
     [InlineData("043f8582f241db351ce627e153e7f0e4", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")]
-    [InlineData("a448017aaf21d8525fc10ae87aa6729d", "abcfile")]
+    [InlineData("e33b4ddc9c38f2199c3e7b164fcc0536", "12345678901234567890123456789012345678901234567890123456789012345678901234567890")]
     public void Test(string expectedDigest, string text)
     {
         var md4 = new MD4(Encoding.ASCII.GetBytes(text).AsSpan());

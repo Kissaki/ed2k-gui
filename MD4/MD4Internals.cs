@@ -14,12 +14,12 @@ public static class MD4Internals
     public const int InputBlockLength = 64;
 
     // high-order digit first
-    // This constant represents the square root of 2.
+    // This constant represents the square root of 2 * 2^30.
     // Octal value 013240474631
     public const uint r2const = 0x5A827999;
 
     // high-order digit first
-    // This constant represents the square root of 3.
+    // This constant represents the square root of 3 * 2^30.
     // Octal value 015666365641
     public const uint r3const = 0x6ED9EBA1;
 
@@ -89,7 +89,7 @@ public static class MD4Internals
     /// </remarks>
     public static uint g(uint x, uint y, uint z)
     {
-        return x & y | x & z | y & z;
+        return (x & y) | (x & z) | (y & z);
     }
 
     /// <remarks>
@@ -104,19 +104,4 @@ public static class MD4Internals
     // #define ff(A,B,C,D,i,s)      A = rot((A + f(B,C,D) + X[i]),s)
     // #define gg(A,B,C,D,i,s)      A = rot((A + g(B,C,D) + X[i] + C2),s)
     // #define hh(A,B,C,D,i,s)      A = rot((A + h(B,C,D) + X[i] + C3),s)
-
-    /// <remarks>
-    /// rot(X,S)  (tmp=X,(tmp<<S) | (tmp>>(32-S)))
-    /// </remarks>
-    public static uint rot(uint x, int s)
-    {
-        uint tmp = x;
-        return tmp << s | tmp >> 32 - s;
-    }
-
-    //public static uint ff(uint a, uint b, uint c, uint d, uint i, int s)
-    //{
-    //    return rot((a + f(b, c, d) + x[i]), s);
-    //}
-
 }
