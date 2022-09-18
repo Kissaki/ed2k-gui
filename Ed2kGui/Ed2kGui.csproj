@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ed2k\Ed2k.csproj" />
     <ProjectReference Include="..\MD4\MD4.csproj" />
   </ItemGroup>
 

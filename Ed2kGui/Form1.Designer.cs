@@ -33,13 +33,13 @@
             // 
             // Results
             // 
-            this.Results.Location = new System.Drawing.Point(42, 151);
+            this.Results.Location = new System.Drawing.Point(21, 151);
             this.Results.Multiline = true;
             this.Results.Name = "Results";
-            this.Results.Size = new System.Drawing.Size(570, 268);
+            this.Results.ReadOnly = true;
+            this.Results.Size = new System.Drawing.Size(720, 268);
             this.Results.TabIndex = 0;
-            this.Results.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
-            this.Results.DragOver += new System.Windows.Forms.DragEventHandler(this.Form1_DragOver);
+            this.Results.WordWrap = false;
             // 
             // Form1
             // 
@@ -50,8 +50,6 @@
             this.Controls.Add(this.Results);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
-            this.DragOver += new System.Windows.Forms.DragEventHandler(this.Form1_DragOver);
             this.ResumeLayout(false);
             this.PerformLayout();
 
