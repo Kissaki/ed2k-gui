@@ -26,7 +26,7 @@ public static class MD4Internals
     /// <summary>
     /// Append to input the bit padding and the input length
     /// </summary>
-    public static Span<byte> PadInput(Span<byte> input)
+    public static Span<byte> PadInput(ReadOnlySpan<byte> input)
     {
         byte[] padded = new byte[DetermineLength(input.Length)];
 

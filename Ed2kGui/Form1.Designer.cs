@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.Results = new System.Windows.Forms.TextBox();
+            this.Worker = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // Results
@@ -58,5 +59,6 @@
         #endregion
 
         private TextBox Results;
+        private System.ComponentModel.BackgroundWorker Worker;
     }
 }

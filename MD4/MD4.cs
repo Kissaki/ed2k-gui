@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Numerics;
+﻿using System.Numerics;
 using System.Runtime.InteropServices;
 using static KCode.MD4.MD4Internals;
 
@@ -38,20 +37,20 @@ public class MD4
     //public string DigestString => string.Join("", MemoryMarshal.ToEnumerable(Digest).Select(x => $"{x:H}"));
     public string DigestString => Convert.ToHexString(Digest).ToLowerInvariant();
 
-    public MD4(Span<byte> input)
+    public MD4(ReadOnlySpan<byte> input)
     {
         var inputPadded = PadInput(input);
         Guard.IsTrue(inputPadded.Length % InputBlockLength == 0);
 
         for (int i = 0; i < inputPadded.Length; i += InputBlockLength)
         {
-            Span<byte> block = inputPadded[i..(i + InputBlockLength)];
+            ReadOnlySpan<byte> block = inputPadded[i..(i + InputBlockLength)];
             ProcessBlock(block);
         }
     }
 
     /// <remarks>RFC names the block variable X</remarks>
-    public void ProcessBlock(Span<byte> block)
+    public void ProcessBlock(ReadOnlySpan<byte> block)
     {
         Guard.HasSizeEqualTo(block, InputBlockLength);
         Guard.HasSizeEqualTo(block, 64);
@@ -125,7 +124,7 @@ public class MD4
     /// <para>Let [A B C D i s] denote A = (A + f(B, C, D) + X[i]) <<< s</para>
     /// <para>[abcd k s]  =>  a = (a + f(b,c,d) + X[k]) <<< s</para>
     /// </remarks>
-    private static void R1(Span<byte> block, ref uint a, uint b, uint c, uint d, int i, int s)
+    private static void R1(ReadOnlySpan<byte> block, ref uint a, uint b, uint c, uint d, int i, int s)
     {
         // nr = word index => byte index
         i *= 4;
@@ -135,7 +134,7 @@ public class MD4
     /// <remarks>
     /// <para>Let [A B C D i s] denote A = (A + g(B, C, D) + X[i] + 5A827999) <<< s.</para>
     /// </remarks>
-    private static void R2(Span<byte> block, ref uint a, uint b, uint c, uint d, int i, int s)
+    private static void R2(ReadOnlySpan<byte> block, ref uint a, uint b, uint c, uint d, int i, int s)
     {
         // nr = word index => byte index
         i *= 4;
@@ -145,7 +144,7 @@ public class MD4
     /// <remarks>
     /// <para>Let [A B C D i s] denote A = (A + h(B, C, D) + X[i] + 6ED9EBA1) <<< s.</para>
     /// </remarks>
-    private static void R3(Span<byte> block, ref uint a, uint b, uint c, uint d, int i, int s)
+    private static void R3(ReadOnlySpan<byte> block, ref uint a, uint b, uint c, uint d, int i, int s)
     {
         // nr = word index => byte index
         i *= 4;
