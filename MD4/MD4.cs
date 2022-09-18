@@ -1,8 +1,8 @@
 ﻿using System.Numerics;
 using System.Runtime.InteropServices;
-using static KCode.MD4.MD4Internals;
+using static KCode.MD4Hash.MD4Internals;
 
-namespace KCode.MD4;
+namespace KCode.MD4Hash;
 
 public class MD4
 {
@@ -128,7 +128,7 @@ public class MD4
     {
         // nr = word index => byte index
         i *= 4;
-        a = BitOperations.RotateLeft(a + f(b, c, d) + MemoryMarshal.Read<uint>(block[i..]), s);
+        a = BitOperations.RotateLeft(a + F(b, c, d) + MemoryMarshal.Read<uint>(block[i..]), s);
     }
 
     /// <remarks>
@@ -138,7 +138,7 @@ public class MD4
     {
         // nr = word index => byte index
         i *= 4;
-        a = BitOperations.RotateLeft(a + g(b, c, d) + MemoryMarshal.Read<uint>(block[i..]) + r2const, s);
+        a = BitOperations.RotateLeft(a + G(b, c, d) + MemoryMarshal.Read<uint>(block[i..]) + r2const, s);
     }
 
     /// <remarks>
@@ -148,6 +148,6 @@ public class MD4
     {
         // nr = word index => byte index
         i *= 4;
-        a = BitOperations.RotateLeft(a + h(b, c, d) + MemoryMarshal.Read<uint>(block[i..]) + r3const, s);
+        a = BitOperations.RotateLeft(a + H(b, c, d) + MemoryMarshal.Read<uint>(block[i..]) + r3const, s);
     }
 }

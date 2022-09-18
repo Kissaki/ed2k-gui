@@ -1,6 +1,6 @@
 ﻿namespace Ed2kGui
 {
-    partial class Form1
+    partial class Ed2kLinkForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,28 +29,42 @@
         private void InitializeComponent()
         {
             this.Results = new System.Windows.Forms.TextBox();
-            this.Worker = new System.ComponentModel.BackgroundWorker();
+            this._worker = new System.ComponentModel.BackgroundWorker();
+            this._progress = new System.Windows.Forms.ProgressBar();
+            this._resultAppender = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // Results
             // 
-            this.Results.Location = new System.Drawing.Point(21, 151);
+            this.Results.Location = new System.Drawing.Point(12, 151);
             this.Results.Multiline = true;
             this.Results.Name = "Results";
             this.Results.ReadOnly = true;
-            this.Results.Size = new System.Drawing.Size(720, 268);
+            this.Results.Size = new System.Drawing.Size(776, 268);
             this.Results.TabIndex = 0;
             this.Results.WordWrap = false;
             // 
-            // Form1
+            // _worker
+            // 
+            this._worker.WorkerReportsProgress = true;
+            // 
+            // _progress
+            // 
+            this._progress.Location = new System.Drawing.Point(12, 122);
+            this._progress.Name = "_progress";
+            this._progress.Size = new System.Drawing.Size(776, 23);
+            this._progress.TabIndex = 1;
+            // 
+            // Ed2kLinkForm
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this._progress);
             this.Controls.Add(this.Results);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "Ed2kLinkForm";
+            this.Text = "ed2k File Link Generator";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -59,6 +73,8 @@
         #endregion
 
         private TextBox Results;
-        private System.ComponentModel.BackgroundWorker Worker;
+        private System.ComponentModel.BackgroundWorker _worker;
+        private ProgressBar _progress;
+        private System.ComponentModel.BackgroundWorker _resultAppender;
     }
 }

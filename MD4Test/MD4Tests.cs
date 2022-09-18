@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using KCode.MD4Hash;
+using System.Text;
 
 namespace MD4Test;
 

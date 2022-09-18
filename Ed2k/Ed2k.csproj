@@ -4,6 +4,8 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AssemblyName>KCode.Ed2kHash</AssemblyName>
+    <RootNamespace>KCode.Ed2kHash</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

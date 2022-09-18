@@ -1,4 +1,4 @@
-﻿namespace KCode.MD4;
+﻿namespace KCode.MD4Hash;
 
 public static class MD4Internals
 {
@@ -77,9 +77,9 @@ public static class MD4Internals
     /// <para>*Side note: (The function f could have been defined using + instead of v since XY and not(X)Z will never have 1's in the same bit position.)*</para>
     /// <para>f(X,Y,Z)  ((X&Y) | ((~X)&Z))</para>
     /// </remarks>
-    public static uint f(uint x, uint y, uint z)
+    public static uint F(uint x, uint y, uint z)
     {
-        return (x & y) | ((~x) & z);
+        return x & y | ~x & z;
     }
 
     /// <remarks>
@@ -87,16 +87,16 @@ public static class MD4Internals
     /// <para>*Side note: It is interesting to note that if the bits of X, Y, and Z are independent and unbiased, then each bit of f(X,Y,Z) will be independent and unbiased, and similarly each bit of g(X,Y,Z) will be independent and unbiased.*</para>
     /// <para>g(X,Y,Z)  ((X&Y) | (X&Z) | (Y&Z))</para>
     /// </remarks>
-    public static uint g(uint x, uint y, uint z)
+    public static uint G(uint x, uint y, uint z)
     {
-        return (x & y) | (x & z) | (y & z);
+        return x & y | x & z | y & z;
     }
 
     /// <remarks>
     /// <para>h: bit-wise xor or parity function</para>
     /// <para>h(X,Y,Z)  (X^Y^Z)</para>
     /// </remarks>
-    public static uint h(uint x, uint y, uint z)
+    public static uint H(uint x, uint y, uint z)
     {
         return x ^ y ^ z;
     }

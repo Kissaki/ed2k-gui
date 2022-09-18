@@ -1,4 +1,4 @@
-﻿namespace Ed2k;
+﻿namespace KCode.Ed2kHash;
 
 public record Ed2kFileLink(string Filename, long FilesizeB, string Digest, string? TopHash = null, string[]? Sources = null)
 {
