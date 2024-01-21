@@ -1,4 +1,6 @@
-﻿namespace Ed2kGui
+﻿using Ed2kGui.UserControls;
+
+namespace Ed2kGui
 {
     partial class Ed2kLinkForm
     {
@@ -28,54 +30,80 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Results = new System.Windows.Forms.TextBox();
-            this._worker = new System.ComponentModel.BackgroundWorker();
-            this._progress = new System.Windows.Forms.ProgressBar();
-            this._resultAppender = new System.ComponentModel.BackgroundWorker();
-            this.SuspendLayout();
+            Results = new TextBox();
+            _worker = new System.ComponentModel.BackgroundWorker();
+            _progressbar = new FastProgressBar();
+            _resultAppender = new System.ComponentModel.BackgroundWorker();
+            _inQueueLabel = new Label();
+            _inQueue = new Label();
+            SuspendLayout();
             // 
             // Results
             // 
-            this.Results.Location = new System.Drawing.Point(12, 151);
-            this.Results.Multiline = true;
-            this.Results.Name = "Results";
-            this.Results.ReadOnly = true;
-            this.Results.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.Results.Size = new System.Drawing.Size(776, 268);
-            this.Results.TabIndex = 0;
-            this.Results.WordWrap = false;
+            Results.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            Results.Location = new Point(12, 151);
+            Results.Multiline = true;
+            Results.Name = "Results";
+            Results.ReadOnly = true;
+            Results.ScrollBars = ScrollBars.Both;
+            Results.Size = new Size(776, 268);
+            Results.TabIndex = 0;
+            Results.WordWrap = false;
             // 
             // _worker
             // 
-            this._worker.WorkerReportsProgress = true;
+            _worker.WorkerReportsProgress = true;
             // 
-            // _progress
+            // _progressbar
             // 
-            this._progress.Location = new System.Drawing.Point(12, 122);
-            this._progress.Name = "_progress";
-            this._progress.Size = new System.Drawing.Size(776, 23);
-            this._progress.TabIndex = 1;
+            _progressbar.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            _progressbar.Location = new Point(12, 122);
+            _progressbar.Name = "_progressbar";
+            _progressbar.Size = new Size(776, 23);
+            _progressbar.TabIndex = 1;
+            _progressbar.Value = 0;
+            // 
+            // _inQueueLabel
+            // 
+            _inQueueLabel.AutoSize = true;
+            _inQueueLabel.Location = new Point(12, 9);
+            _inQueueLabel.Name = "_inQueueLabel";
+            _inQueueLabel.Size = new Size(58, 15);
+            _inQueueLabel.TabIndex = 2;
+            _inQueueLabel.Text = "In Queue:";
+            // 
+            // _inQueue
+            // 
+            _inQueue.AutoSize = true;
+            _inQueue.Location = new Point(76, 9);
+            _inQueue.Name = "_inQueue";
+            _inQueue.Size = new Size(111, 15);
+            _inQueue.TabIndex = 3;
+            _inQueue.Text = "<InQueueContent>";
             // 
             // Ed2kLinkForm
             // 
-            this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this._progress);
-            this.Controls.Add(this.Results);
-            this.Name = "Ed2kLinkForm";
-            this.Text = "ed2k File Link Generator";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AllowDrop = true;
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(_inQueue);
+            Controls.Add(_inQueueLabel);
+            Controls.Add(_progressbar);
+            Controls.Add(Results);
+            Name = "Ed2kLinkForm";
+            Text = "ed2k File Link Generator";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private TextBox Results;
         private System.ComponentModel.BackgroundWorker _worker;
-        private ProgressBar _progress;
+        private FastProgressBar _progressbar;
         private System.ComponentModel.BackgroundWorker _resultAppender;
+        private Label _inQueueLabel;
+        private Label _inQueue;
     }
 }
