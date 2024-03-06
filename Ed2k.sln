@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MD4Test", "MD4Test\MD4Test.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MD4", "MD4\MD4.csproj", "{CE9926A3-627E-4A1A-9B6C-6C37A2AA1584}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ed2k", "Ed2k\Ed2k.csproj", "{5E6EF62A-0F26-4DE7-80AB-AC21BC5FE4AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ed2k", "Ed2k\Ed2k.csproj", "{5E6EF62A-0F26-4DE7-80AB-AC21BC5FE4AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
