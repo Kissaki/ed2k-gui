@@ -1,5 +1,6 @@
 ﻿namespace KCode.Ed2kHash;
 
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S101:Types should be named in PascalCase", Justification = "False positive. 'ed2k' is the full term.")]
 public record Ed2kFileLink(string Filename, long FilesizeB, string Digest, string? TopHash = null, string[]? Sources = null)
 {
     public override string ToString()
