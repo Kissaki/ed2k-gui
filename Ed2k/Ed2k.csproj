@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <AssemblyName>KCode.Ed2kHash</AssemblyName>
@@ -7,6 +7,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MD4\MD4.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="KCode.MD4Hash;" />
+    <Using Include="System.Buffers;" />
+    <Using Include="System.Runtime.InteropServices;" />
   </ItemGroup>
 
 </Project>
