@@ -1,10 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>net8.0-windows</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.1" />
@@ -22,5 +16,10 @@
   <ItemGroup>
     <ProjectReference Include="..\MD4\MD4.csproj" />
   </ItemGroup>
+
+	<ItemGroup>
+		<Using Include="KCode.MD4Hash"/>
+		<Using Include="Xunit"/>
+	</ItemGroup>
 
 </Project>
