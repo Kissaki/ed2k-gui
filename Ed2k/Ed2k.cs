@@ -1,7 +1,7 @@
 ﻿namespace KCode.Ed2kHash;
 
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S101:Types should be named in PascalCase", Justification = "False positive. 'ed2k' is the full term.")]
-public class Ed2k
+public static class Ed2k
 {
     private const int _blockSize = 9728000;
 
