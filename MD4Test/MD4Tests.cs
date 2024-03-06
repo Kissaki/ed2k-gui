@@ -150,7 +150,7 @@ public class MD4Tests
     [Fact]
     public void TestEmptyData()
     {
-        var md4 = new MD4(Array.Empty<byte>());
+        var md4 = new MD4([]);
 
         Assert.Equal("31d6cfe0d16ae931b73c59d7e0c089c0", md4.DigestString);
     }
