@@ -2,6 +2,7 @@
 
 namespace Ed2kGui.UserControls;
 
+/// <summary>Replacement <see cref="ProgressBar"/> that immediately draws progress instead of smoothing it out (at the cost of timely accuracy).</summary>
 internal class FastProgressBar : UserControl
 {
     [Category("Appearance")]
