@@ -5,12 +5,12 @@
     <RootNamespace>KCode.MD4Hash</RootNamespace>
   </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Diagnostics" Version="8.0.0" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Diagnostics" Version="8.0.0" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<Using Include="CommunityToolkit.Diagnostics"/>
-	</ItemGroup>
+  <ItemGroup>
+    <Using Include="CommunityToolkit.Diagnostics"/>
+  </ItemGroup>
 
 </Project>

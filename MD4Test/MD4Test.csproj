@@ -17,9 +17,9 @@
     <ProjectReference Include="..\MD4\MD4.csproj" />
   </ItemGroup>
 
-	<ItemGroup>
-		<Using Include="KCode.MD4Hash"/>
-		<Using Include="Xunit"/>
-	</ItemGroup>
+  <ItemGroup>
+    <Using Include="KCode.MD4Hash"/>
+    <Using Include="Xunit"/>
+  </ItemGroup>
 
 </Project>
