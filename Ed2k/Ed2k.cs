@@ -8,7 +8,7 @@ public class Ed2k
     {
         var pool = ArrayPool<byte>.Shared;
         using var r = new BufferedStream(File.OpenRead(fpath));
-        List<byte> digests = new();
+        List<byte> digests = [];
 
         FileInfo fi = new(fpath);
         int blockCount = (int)(fi.Length / _blockSize) + 1;

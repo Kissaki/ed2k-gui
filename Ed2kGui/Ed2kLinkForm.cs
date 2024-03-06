@@ -1,12 +1,12 @@
-using KCode.Ed2kHash;
+﻿using KCode.Ed2kHash;
 using System.Collections.Concurrent;
 
 namespace Ed2kGui
 {
     public partial class Ed2kLinkForm : Form
     {
-        private readonly BlockingCollection<string> _fpaths = new();
-        private readonly BlockingCollection<string> _results = new();
+        private readonly BlockingCollection<string> _fpaths = [];
+        private readonly BlockingCollection<string> _results = [];
         private readonly Progress<int> _computeWorkerProgress;
 
         public Ed2kLinkForm()
