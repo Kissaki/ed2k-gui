@@ -17,6 +17,7 @@ namespace Ed2kGui
         {
             if (disposing && (components != null))
             {
+                DisposeManaged();
                 components.Dispose();
             }
             base.Dispose(disposing);

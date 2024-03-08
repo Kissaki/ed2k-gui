@@ -8,10 +8,12 @@ namespace Ed2kGui
         private readonly BlockingCollection<string> _fpaths = [];
         private readonly BlockingCollection<string> _results = [];
         private readonly Progress<int> _computeWorkerProgress;
+        private readonly Ed2kLinkFormDragHandler _dragHandler;
 
         public Ed2kLinkForm()
         {
             InitializeComponent();
+            _dragHandler = new(this, _fpaths);
             _computeWorkerProgress = new Progress<int>(_worker.ReportProgress);
             InitEventHandlers();
 
@@ -19,39 +21,15 @@ namespace Ed2kGui
             _resultAppender.RunWorkerAsync();
         }
 
+        public void DisposeManaged()
+        {
+            _dragHandler.Dispose();
+        }
+
         private void InitEventHandlers()
         {
-            InitDropEventHandlers();
             InitBackgroundWorker();
             InitBackgroundResultAppender();
-
-            void InitDropEventHandlers()
-            {
-                DragOver += (s, e) => e.Effect = e.Data?.GetDataPresent(DataFormats.FileDrop) ?? false ? DragDropEffects.Copy : DragDropEffects.None;
-                DragDrop += (s, e) =>
-                {
-                    object? fileData = e.Data?.GetData(DataFormats.FileDrop);
-                    if (fileData == null) return;
-
-                    var filePaths = (string[])fileData;
-                    foreach (var fpath in filePaths)
-                    {
-                        var isFile = File.Exists(fpath);
-                        if (isFile) _fpaths.Add(fpath);
-
-                        var isDir = Directory.Exists(fpath);
-                        if (isDir)
-                        {
-                            var di = new DirectoryInfo(fpath);
-                            var fiRecursive = di.GetFiles("", SearchOption.AllDirectories);
-                            foreach (var fi in fiRecursive)
-                            {
-                                _fpaths.Add(fi.FullName);
-                            }
-                        }
-                    }
-                };
-            }
 
             void InitBackgroundWorker()
             {
