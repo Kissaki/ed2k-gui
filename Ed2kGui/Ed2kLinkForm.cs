@@ -34,7 +34,22 @@ namespace Ed2kGui
                     if (fileData == null) return;
 
                     var filePaths = (string[])fileData;
-                    foreach (var fpath in filePaths) _fpaths.Add(fpath);
+                    foreach (var fpath in filePaths)
+                    {
+                        var isFile = File.Exists(fpath);
+                        if (isFile) _fpaths.Add(fpath);
+
+                        var isDir = Directory.Exists(fpath);
+                        if (isDir)
+                        {
+                            var di = new DirectoryInfo(fpath);
+                            var fiRecursive = di.GetFiles("", SearchOption.AllDirectories);
+                            foreach (var fi in fiRecursive)
+                            {
+                                _fpaths.Add(fi.FullName);
+                            }
+                        }
+                    }
                 };
             }
 
