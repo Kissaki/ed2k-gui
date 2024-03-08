@@ -16,6 +16,7 @@ namespace Ed2kGui
             _dragHandler = new(this, _fpaths);
             _computeWorkerProgress = new Progress<int>(_worker.ReportProgress);
             InitEventHandlers();
+            _inQueue.Text = $"{_fpaths.Count}";
 
             _worker.RunWorkerAsync();
             _resultAppender.RunWorkerAsync();
@@ -39,10 +40,12 @@ namespace Ed2kGui
                     {
                         // Blocking take
                         var fpath = _fpaths.Take();
+                        Invoke(() => _inQueue.Text = $"{_fpaths.Count}");
                         FileInfo fi = new(fpath);
                         var hash = Ed2k.Compute(fpath, _computeWorkerProgress);
                         var link = new Ed2kFileLink(fi.Name, fi.Length, hash);
                         _results.Add(link.ToString());
+                        Invoke(() => _inQueue.Text = $"{_fpaths.Count}");
                     }
                 };
                 _worker.ProgressChanged += (s, e) => _progressbar.Value = e.ProgressPercentage;
