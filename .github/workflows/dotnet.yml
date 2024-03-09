@@ -1,0 +1,21 @@
+name: dotnet
+on: [push]
+jobs:
+  ci:
+    permissions:
+      contents: read
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Test
+      shell: pwsh
+      run: dotnet test --nologo --configuration Release --verbosity quiet | Tee-Object -Append $env:GITHUB_STEP_SUMMARY
+    - name: Publish
+      shell: pwsh
+      run: dotnet publish --nologo --configuration Release --verbosity minimal /p:PublishProfile=FolderProfile.pubxml Ed2kGui/ | Tee-Object -Append $env:GITHUB_STEP_SUMMARY
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: Package
+        path: publish
+        if-no-files-found: error
