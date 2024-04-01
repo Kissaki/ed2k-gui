@@ -1,4 +1,16 @@
-﻿# Markdown File
+﻿# ed2k generator utility
+
+Windows GUI application for simple drag+drop file ed2k hash-link generating.
+
+![screenshot of ed2k-gui desktop app](docs/screenshot-ui.jpg)
+
+The anime database [AniDB](https://anidb.net/) uses ed2k hash-links to uniquely identify files.
+Generating ed2k links from files eases managing your own list of files, their states, as well as contributing information to AniDB.
+
+I found other utilities to be a hassle to set up or use, and the sources unapproachable when they were available.
+With a technical interest in what ed2k-hashing does, I created this simple file-drag-and-drop utility in .NET 8, C#, WinForms.
+
+## References / Implementation Notes
 
 http://wiki.amule.org/t/index.php?title=MD4_hash
 
